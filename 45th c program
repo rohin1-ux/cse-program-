@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int reverseNumber(int n, int reversed) {
+    // Base case: when n becomes 0, 
+    if (n == 0) {
+        return reversed;
+    }
+    return reverseNumber(n / 10, reversed * 10 + n % 10);
+}
+
+int main() {
+    int number;
+
+    printf("Enter a number: ");
+    scanf("%d", &number);
+
+    int reversed = reverseNumber(number < 0 ? -number : number, 0);
+
+    if (number < 0) {
+        printf("Reversed number: -%d\n", reversed);
+    } else {
+        printf("Reversed number: %d\n", reversed);
+    }
+
+    return 0;
+}

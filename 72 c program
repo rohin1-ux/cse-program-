@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+struct Person {
+    char name[50];
+    int age;
+    struct Date birthdate;  
+};
+
+int main() {
+    struct Person person1 = {
+        "John Doe",           // Name
+        30,                   // Age
+        {15, 5, 1994}         // Birthdate (nested structure)
+    };
+
+    printf("Person Details:\n");
+    printf("Name: %s\n", person1.name);
+    printf("Age: %d\n", person1.age);
+    printf("Birthdate: %02d/%02d/%d\n", person1.birthdate.day, person1.birthdate.month, person1.birthdate.year);
+
+    return 0;
+}

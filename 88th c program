@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+#define MAX 10  
+
+void transpose(int matrix[][MAX], int transposeMatrix[][MAX], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            transposeMatrix[j][i] = matrix[i][j];
+        }
+    }
+}
+
+void printMatrix(int matrix[][MAX], int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int matrix[MAX][MAX], transposeMatrix[MAX][MAX];
+    int rows, cols;
+
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+
+    printf("Enter the elements of the matrix:\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    transpose(matrix, transposeMatrix, rows, cols);
+
+    printf("\nOriginal Matrix:\n");
+    printMatrix(matrix, rows, cols);
+
+    printf("\nTranspose of the Matrix:\n");
+    printMatrix(transposeMatrix, cols, rows);  
+
+    return 0;
+}

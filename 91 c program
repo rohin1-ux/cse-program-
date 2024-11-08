@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+#define MAX 10 
+
+int isSymmetric(int matrix[MAX][MAX], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (matrix[i][j] != matrix[j][i]) {
+                return 0;  // Matrix is not symmetric
+            }
+        }
+    }
+    return 1;  
+}
+void inputMatrix(int matrix[MAX][MAX], int n) {
+    printf("Enter the elements of the matrix:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+}
+
+void printMatrix(int matrix[MAX][MAX], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int matrix[MAX][MAX], n;
+
+    printf("Enter the size of the square matrix: ");
+    scanf("%d", &n);
+
+    inputMatrix(matrix, n);
+
+    printf("\nThe matrix is:\n");
+    printMatrix(matrix, n);
+
+    if (isSymmetric(matrix, n)) {
+        printf("\nThe matrix is symmetric.\n");
+    } else {
+        printf("\nThe matrix is not symmetric.\n");
+    }
+
+    return 0;
+}

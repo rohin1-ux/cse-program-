@@ -1,0 +1,16 @@
+#include <stdio.h>
+struct Student {
+    int rollNumber;
+    char name[50];
+    float marks;
+};
+
+int main() {
+    struct Student student1;
+
+    printf("Size of structure 'Student': %zu bytes\n", sizeof(student1));
+
+    printf("Size of structure 'Student' (using sizeof with type): %zu bytes\n", sizeof(struct Student));
+
+    return 0;
+}

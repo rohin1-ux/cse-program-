@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+void modifyValue(int *ptr);
+void pointerArithmeticDemo();
+
+int main() {
+    int a = 10;
+    int b = 20;
+    int *ptrA, *ptrB;
+
+    // Demonstrating basic pointer usage
+    ptrA = &a;  
+    ptrB = &b;  
+
+    // Output the values using pointers
+    printf("Value of a: %d\n", a);
+    printf("Value of b: %d\n", b);
+    printf("Value of a through pointer ptrA: %d\n", *ptrA);
+    printf("Value of b through pointer ptrB: %d\n", *ptrB);
+
+    modifyValue(ptrA);
+    printf("Value of a after modifyValue function: %d\n", a);
+
+    pointerArithmeticDemo();
+
+    return 0;
+}
+
+// Function that modifies the value of the integer pointed by ptr
+void modifyValue(int *ptr) {
+    *ptr = 50;  
+}
+
+void pointerArithmeticDemo() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int *ptr = arr;
+
+    printf("\nPointer Arithmetic Demo:\n");
+    printf("Using pointer to access array elements:\n");
+    
+    for (int i = 0; i < 5; i++) {
+        printf("arr[%d] = %d, *(ptr + %d) = %d\n", i, arr[i], i, *(ptr + i));
+    }
+}
+

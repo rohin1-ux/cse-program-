@@ -1,0 +1,107 @@
+#include <stdio.h>
+
+#define MAX 10
+
+int determinant(int matrix[MAX][MAX], int n) {
+    int det = 0;
+
+    if (n == 1) {
+        return matrix[0][0];
+    }
+
+    if (n == 2) {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    }
+
+    int cofactor[MAX][MAX];  
+
+    for (int i = 0; i < n; i++) {
+        getCofactor(matrix, cofactor, 0, i, n);
+        det += ((i % 2 == 0 ? 1 : -1) * matrix[0][i] * determinant(cofactor, n - 1));
+    }
+
+    return det;
+}
+
+void getCofactor(int matrix[MAX][MAX], int cofactor[MAX][MAX], int p, int q, int n) {
+    int i = 0, j = 0;
+    
+    for (int row = 0; row < n; row++) {
+        for (int col = 0; col < n; col++) {
+            if (row != p && col != q) {
+                cofactor[i][j++] = matrix[row][col];
+                
+                if (j == n - 1) {
+                    j = 0;
+                    i++;
+                }
+            }
+        }
+    }
+}
+void adjugate(int matrix[MAX][MAX], int adj[MAX][MAX], int n) {
+    if (n == 1) {
+        adj[0][0] = 1;
+        return;
+    }
+
+    int cofactor[MAX][MAX];  
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            getCofactor(matrix, cofactor, i, j, n);
+            
+            // Apply sign correction based on position
+            adj[j][i] = ((i + j) % 2 == 0 ? 1 : -1) * determinant(cofactor, n - 1);  
+        }
+    }
+}
+
+int inverse(int matrix[MAX][MAX], float inverseMatrix[MAX][MAX], int n) {
+    int det = determinant(matrix, n);
+    if (det == 0) {
+        printf("Matrix is singular, so inverse does not exist.\n");
+        return 0;
+    }
+
+    int adj[MAX][MAX];
+    adjugate(matrix, adj, n);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            inverseMatrix[i][j] = adj[i][j] / (float)det;
+        }
+    }
+
+    return 1;
+}
+
+void printMatrix(float matrix[MAX][MAX], int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%0.2f ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int matrix[MAX][MAX], n;
+    float inverseMatrix[MAX][MAX];
+
+    printf("Enter the size of the square matrix: ");
+    scanf("%d", &n);
+
+    printf("Enter the elements of the matrix:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    if (inverse(matrix, inverseMatrix, n)) {
+        printf("\nThe inverse of the matrix is:\n");
+        printMatrix(inverseMatrix, n);
+    }
+
+    return 0;
+}

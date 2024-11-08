@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    int *ptr = arr; 
+    
+    printf("Array elements accessed using pointer arithmetic:\n");
+    for (int i = 0; i < 5; i++) {
+        printf("Element %d: %d\n", i + 1, *(ptr + i)); // ptr + i gives the address of the i-th element
+    }
+
+    printf("\nPointer arithmetic to increment the pointer:\n");
+    printf("Initial pointer points to: %d\n", *ptr);  
+    ptr++; 
+    printf("After incrementing, pointer points to: %d\n", *ptr);  
+
+    int *ptr1 = &arr[0];
+    int *ptr2 = &arr[3];
+    printf("\nPointer difference between arr[3] and arr[0]: %ld\n", ptr2 - ptr1);  
+
+    ptr--;  
+    printf("\nAfter moving back to arr[0], pointer points to: %d\n", *ptr);  
+
+    return 0;
+}

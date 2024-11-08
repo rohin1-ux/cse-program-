@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main() {
+    FILE *file1, *file2, *mergedFile;
+    int ch;                           
+
+    file1 = fopen("file1.txt", "r");
+    if (file1 == NULL) {
+        printf("Error: Could not open file1.txt for reading.\n");
+        return 1;
+    }
+
+    file2 = fopen("file2.txt", "r");
+    if (file2 == NULL) {
+        printf("Error: Could not open file2.txt for reading.\n");
+        fclose(file1);
+        return 1;
+    }
+
+    mergedFile = fopen("merged.txt", "w");
+    if (mergedFile == NULL) {
+        printf("Error: Could not open merged.txt for writing.\n");
+        fclose(file1);  
+        fclose(file2);  // Close the second file before exiting
+        return 1;
+    }
+
+    while ((ch = fgetc(file1)) != EOF) {
+        fputc(ch, mergedFile);
+    }
+
+    while ((ch = fgetc(file2)) != EOF) {
+        fputc(ch, mergedFile);
+    }
+
+    fclose(file1);
+    fclose(file2);
+    fclose(mergedFile);
+
+    printf("The contents of file1.txt and file2.txt have been merged into merged.txt.\n");
+
+    return 0;
+}

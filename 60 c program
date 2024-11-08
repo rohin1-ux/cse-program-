@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+void matrixMultiply(int *A, int *B, int *C, int rowsA, int colsA, int rowsB, int colsB);
+
+int main() {
+    int rowsA, colsA, rowsB, colsB;
+
+    printf("Enter the number of rows and columns for matrix A: ");
+    scanf("%d %d", &rowsA, &colsA);
+
+    printf("Enter the number of rows and columns for matrix B: ");
+    scanf("%d %d", &rowsB, &colsB);
+
+    if (colsA != rowsB) {
+        printf("Matrix multiplication is not possible: number of columns of A must equal number of rows of B.\n");
+        return 1;
+    }
+
+    int A[rowsA][colsA], B[rowsB][colsB], C[rowsA][colsB];
+
+    printf("Enter elements of matrix A:\n");
+    for (int i = 0; i < rowsA; i++) {
+        for (int j = 0; j < colsA; j++) {
+            printf("A[%d][%d]: ", i, j);
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    printf("Enter elements of matrix B:\n");
+    for (int i = 0; i < rowsB; i++) {
+        for (int j = 0; j < colsB; j++) {
+            printf("B[%d][%d]: ", i, j);
+            scanf("%d", &B[i][j]);
+        }
+    }
+
+    matrixMultiply(&A[0][0], &B[0][0], &C[0][0], rowsA, colsA, rowsB, colsB);
+
+    printf("The result of matrix multiplication is:\n");
+    for (int i = 0; i < rowsA; i++) {
+        for (int j = 0; j < colsB; j++) {
+            printf("%d ", C[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+void matrixMultiply(int *A, int *B, int *C, int rowsA, int colsA, int rowsB, int colsB) {
+    for (int i = 0; i < rowsA; i++) {
+        for (int j = 0; j < colsB; j++) {
+            *(C + i * colsB + j) = 0;  // Initialize the element in C[i][j] to 0
+            for (int k = 0; k < colsA; k++) {
+                *(C + i * colsB + j) += *(A + i * colsA + k) * *(B + k * colsB + j);
+            }
+        }
+    }
+}

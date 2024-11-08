@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+void generateFibonacci(int n) {
+    // First two Fibonacci numbers
+    long long first = 0, second = 1;
+
+    
+    if (n >= 1) {
+        printf("%lld ", first);
+    }
+
+    if (n >= 2) {
+        printf("%lld ", second);
+    }
+
+    for (int i = 3; i <= n; i++) {
+        long long next = first + second;
+        printf("%lld ", next);
+        first = second;
+        second = next;
+    }
+
+    printf("\n");
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of Fibonacci numbers to generate: ");
+    scanf("%d", &n);
+
+    if (n > 0) {
+        generateFibonacci(n);
+    } else {
+        printf("Please enter a positive integer for n.\n");
+    }
+
+    return 0;
+}

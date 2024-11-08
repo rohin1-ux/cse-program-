@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+void moveDisk(int n, char fromPeg, char toPeg) {
+    printf("Move disk %d from peg %c to peg %c\n", n, fromPeg, toPeg);
+}
+void towerOfHanoi(int n, char fromPeg, char toPeg, char auxPeg)
+    if (n == 1) {
+        moveDisk(1, fromPeg, toPeg);
+        return;
+    }
+
+    towerOfHanoi(n - 1, fromPeg, auxPeg, toPeg);
+
+    moveDisk(n, fromPeg, toPeg);
+
+    towerOfHanoi(n - 1, auxPeg, toPeg, fromPeg);
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of disks: ");
+    scanf("%d", &n);
+
+    printf("The sequence of moves involved in solving the Tower of Hanoi are:\n");
+    towerOfHanoi(n, 'A', 'C', 'B');  
+
+    return 0;
+}

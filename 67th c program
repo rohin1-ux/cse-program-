@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+union Data {
+    int intValue;
+    float floatValue;
+    char charValue;
+};
+
+int main() {
+    union Data data;
+
+    data.intValue = 10;
+    printf("data.intValue: %d\n", data.intValue);
+
+    data.floatValue = 3.14;
+    printf("data.floatValue: %.2f\n", data.floatValue);
+
+    data.charValue = 'A';
+    printf("data.charValue: %c\n", data.charValue);
+
+    printf("\nAfter assigning charValue:\n");
+    printf("data.intValue: %d\n", data.intValue);     
+    printf("data.floatValue: %.2f\n", data.floatValue); 
+    printf("data.charValue: %c\n", data.charValue);  
+
+    return 0;
+}
